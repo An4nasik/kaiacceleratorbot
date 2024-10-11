@@ -1,0 +1,5 @@
+aiogram~=3.13.1
+g4f~=0.3.2.9
+python-decouple==3.8
+curl_cffi
+nest_asyncio
