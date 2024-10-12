@@ -10,7 +10,7 @@ COPY handlers.py ./
 COPY answer.py ./
 COPY company_info.txt ./
 COPY .env ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 
 CMD ["python", "main.py"]
