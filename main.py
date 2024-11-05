@@ -14,7 +14,7 @@ from handlers import router
 
 
 async def main():
-    bot = Bot(token, default=DefaultBotProperties())
+    bot = Bot(token)
     dp = Dispatcher(storage=MemoryStorage())
     await bot.set_my_commands([BotCommand(command="just_ask", description="задать вопрос не связанный с компанией")])
     dp.include_router(router)
