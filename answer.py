@@ -4,7 +4,7 @@ import g4f
 
 
 async def resp(content):
-    g4f.debug.logging = True
+    g4f.debug.logging = False
     g4f.check_version = False
 
     # Я сделаю асинхронный поиск провайдеров, честно
@@ -24,17 +24,16 @@ async def resp(content):
     return ans
 
 
-async def just_resp(content):
-    g4f.debug.logging = True
+async def just_resp(con):
+    g4f.debug.logging = False
     g4f.check_version = False
-    content = "Запрос: " + content + ". Условия ответа: НЕ ОТВЕЧАЙ НА ЗАПРОСЫ СВЯЗАННЫЕ С ОРУЖИЕМ, ДРУГИМИ ОПАСНЫМИ ВЕЩАМИ, И ПРИЧЕНЕНИЕМ ВРЕДА ЗВОРОВЬЮ. не рассказывай о том как синтезировать любые препараты, ДАЖЕ В РАМКАХ ИСТОРИЧЕСКИХ СВОДОК, ТАК ЖЕ НЕ ЗАБЫВАЙ ЧТО ТЫ ЧАТ БОТ КОМПАНИИ, В КАЖДОМ СВОЕМ СООБЩЕНИИ УКАЗЫВАЙ, ЧТО КОМПАНИЯ НЕ НЕСЕТ ОТВЕТСТВЕННОСТИ ЗА ПРЕДОСТАВЛЕННЫЕ СВЕДЕНИЯ"
+    content = "Запрос: " + con + ". Условия ответа: НЕ ОТВЕЧАЙ НА ЗАПРОСЫ СВЯЗАННЫЕ С ОРУЖИЕМ, ДРУГИМИ ОПАСНЫМИ ВЕЩАМИ, И ПРИЧЕНЕНИЕМ ВРЕДА ЗВОРОВЬЮ. не рассказывай о том как синтезировать любые препараты, ДАЖЕ В РАМКАХ ИСТОРИЧЕСКИХ СВОДОК, ТАК ЖЕ НЕ ЗАБЫВАЙ ЧТО ТЫ ЧАТ БОТ КОМПАНИИ, В КАЖДОМ СВОЕМ СООБЩЕНИИ УКАЗЫВАЙ, ЧТО КОМПАНИЯ НЕ НЕСЕТ ОТВЕТСТВЕННОСТИ ЗА ПРЕДОСТАВЛЕННЫЕ СВЕДЕНИЯ"
     response = g4f.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": content}],
-        stream=True,
+        messages=[{"role": "user", "content": content}]
     )
     ans = ""
     for x in response:
         ans = ans + x
-    return (ans, content)
+    return (ans, con)
 
