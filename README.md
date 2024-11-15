@@ -13,7 +13,9 @@
 <h2>Желающие запустить docker образ</h2>
 <p>Собираем docker образ</p>
 <p>Запускаем контейнер и прописываем комманды:</p>
-<p>  ollama run llama3:8b</p>
-<p>  Жмем ctrl+d</p>
-<p>  python3 main.py</p>
+<ol>
+  <li><p>ollama run llama3:8b</p></li>
+  <li><p>Жмем ctrl+d</p></li>
+  <li><p>python3 main.py</p></li>
+</ol>
 <p>Вот и все, бот будет работать</p>
