@@ -9,7 +9,7 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message
 from answer import resp, just_resp
 from data import db_session
-from sqlalchemy import text
+
 con = sqlite3.connect("users.db", check_same_thread=False)
 cur = con.cursor()
 db_session.global_init("db/users.db")
@@ -33,13 +33,13 @@ async def message_handler(msg: Message, state: FSMContext):
 
 @router.message(Form.data)
 async def process_name(message: types.Message, state: FSMContext):
-    # Finish our conversation
     ans, req = await just_resp(message.text)
     print("ans: ", ans)
     print("req: ", req)
     while not ans:
         ans, req = await just_resp(message.text)
-    post = Messages(id=message.from_user.id, message=("Запрос - " + req + " Ответ - " + ans + " Дата - " + str(datetime.datetime.now())))
+    post = Messages(id=message.from_user.id,
+                    message=("Запрос - " + req + " Ответ - " + ans + " Дата - " + str(datetime.datetime.now())))
     db_sess = db_session.create_session()
     db_sess.add(post)
     db_sess.commit()
@@ -48,14 +48,15 @@ async def process_name(message: types.Message, state: FSMContext):
     await message.reply(ans)
 
 
-
 @router.message()
 async def message_handler(msg: Message):
+    await router.send_chat_action(chat_id=msg.from_user.id, action="typing")
     ans = await resp(msg.text)
     print("ans: ", ans)
     while not ans:
         ans = await resp(msg.text)
-    post = Messages(id=msg.from_user.id, message=("Запрос - " + msg.text + " Ответ - " + ans + " Дата - " + str(datetime.datetime.now())))
+    post = Messages(id=msg.from_user.id,
+                    message=("Запрос - " + msg.text + " Ответ - " + ans + " Дата - " + str(datetime.datetime.now())))
     db_sess = db_session.create_session()
     db_sess.add(post)
     db_sess.commit()

@@ -1,12 +1,9 @@
 import asyncio
 import logging
-from aiogram.client.bot import DefaultBotProperties
 from aiogram import Bot, Dispatcher
-from aiogram.enums.parse_mode import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import BotCommand
 from decouple import config
-
 token = config("BOT_TOKEN")
 ADMIN_ID = config('ADMIN_ID')
 
